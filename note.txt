@@ -1,0 +1,51 @@
+{
+  "Make": "SONY",
+  "Model": "ILCE-7CM2",
+  "Orientation": 1,
+  "XResolution": 350,
+  "YResolution": 350,
+  "ResolutionUnit": 2,
+  "Software": "ILCE-7CM2 v1.01",
+  "ModifyDate": 1680200756,
+  "YCbCrPositioning": 2,
+  "ExposureTime": 0.002, // 曝光
+  "FNumber": 5.6, // 光圈
+  "ExposureProgram": 4,
+  "ISO": 3200, // ISO
+  "SensitivityType": 2,
+  "RecommendedExposureIndex": 3200,
+  "DateTimeOriginal": 1680200756,
+  "CreateDate": 1680200756,
+  "undefined": "+08:00",
+  "CompressedBitsPerPixel": 6,
+  "BrightnessValue": 3.3453125,
+  "ExposureCompensation": 0,
+  "MaxApertureValue": 4.96875,
+  "MeteringMode": 5,
+  "LightSource": 0,
+  "Flash": 16,
+  "FocalLength": 60, // 焦距
+  "SubSecTime": "957",
+  "SubSecTimeOriginal": "957",
+  "SubSecTimeDigitized": "957",
+  "ColorSpace": 1,
+  "ExifImageWidth": 7008,
+  "ExifImageHeight": 4672,
+  "CustomRendered": 0,
+  "ExposureMode": 0,
+  "WhiteBalance": 0,
+  "DigitalZoomRatio": 1,
+  "FocalLengthIn35mmFormat": 60,
+  "SceneCaptureType": 0,
+  "Contrast": 0,
+  "Saturation": 0,
+  "Sharpness": 0,
+  "LensInfo": [
+    28,
+    60,
+    4,
+    5.6
+  ],
+  "LensModel": "FE 28-60mm F4-5.6",
+  "InteropIndex": "R98"
+}

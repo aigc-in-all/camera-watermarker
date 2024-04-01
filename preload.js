@@ -1,8 +1,9 @@
-const { contextBridge } = require('electron')
+const { contextBridge, ipcRenderer } = require('electron');
 
-contextBridge.exposeInMainWorld('versions', {
-    node: () => process.versions.node,
-    chrome: () => process.versions.chrome,
-    electron: () => process.versions.electron
-    // 除函数之外，我们也可以暴露变量
-})
+contextBridge.exposeInMainWorld('electronAPI', {
+    openFileDialog: () => ipcRenderer.invoke('open-file-dialog'),
+    openDirectoryDialog: () => ipcRenderer.invoke('open-directory-dialog'),
+    processImage: (imageFilePath, outputDirectory) => ipcRenderer.invoke('process-image', imageFilePath, outputDirectory),
+    getMetadata: (path) => ipcRenderer.invoke('get-metadata', path),
+    writeMetadataToImage: (data) => ipcRenderer.invoke('write-metadata-to-image', data)
+});
