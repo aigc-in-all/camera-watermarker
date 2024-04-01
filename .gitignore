@@ -130,3 +130,4 @@ dist
 .pnp.*
 
 output.jpg
+.DS_Store
