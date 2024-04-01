@@ -63,11 +63,17 @@ const createWindow = () => {
         const image = sharp(imageFilePath);
         const imageMetadata = await image.metadata();
 
+        // 检查图片方向
+        const isPortrait = metadata.Orientation && [5, 6, 7, 8].includes(metadata.Orientation);
+        if (isPortrait) {
+            image.rotate();
+        }
+
         const barHeight = 140; // 底栏的高度，可以根据需要调整
-        const width = imageMetadata.width;
+        const width = isPortrait ? imageMetadata.height : imageMetadata.width;
         const fontSize = 60; // 字体大小，可以根据需要调整
         const textYPosition = barHeight / 2 + fontSize / 2 - 10; // 垂直居中文本 10表示偏移量，看上去会更居中些
-        const fontFamily = "Arial"; // 字体，可以根据需要调整，例如："Times New Roman
+        const fontFamily = "Arial"; // 字体，可以根据需要调整，例如："Times New Roman"
 
         // 构建显示信息
         const createDateTimestamp = metadata.CreateDate ? parseInt(metadata.CreateDate, 10) * 1000 : null;
@@ -79,20 +85,16 @@ const createWindow = () => {
             (metadata.ISO ? ` ISO${metadata.ISO}` : '');
 
         const svgOverlay = `<svg width="${width}" height="${barHeight}">
-            <rect x="0" y="0" width="${width}" height="${barHeight}" font-family="${fontFamily}" fill="rgba(0, 0, 0, 0.1)" />
-            <text x="100" y="${textYPosition}" font-size="${fontSize}" font-family="${fontFamily}" fill="gold">${createDate}</text>
-            <text x="${width / 2}" y="${textYPosition}" font-size="${fontSize}" font-family="${fontFamily}" fill="gold" text-anchor="middle">${makeModel}</text>
-            <text x="${width - 100}" y="${textYPosition}" font-size="${fontSize}" font-family="${fontFamily}" fill="gold" text-anchor="end">${cameraInfo}</text>
-            </svg>`;
+                <rect x="0" y="0" width="${width}" height="${barHeight}" font-family="${fontFamily}" fill="rgba(0, 0, 0, 0.1)" />
+                <text x="100" y="${textYPosition}" font-size="${fontSize}" font-family="${fontFamily}" fill="gold">${createDate}</text>
+                <text x="${width / 2}" y="${textYPosition}" font-size="${fontSize}" font-family="${fontFamily}" fill="gold" text-anchor="middle">${makeModel}</text>
+                <text x="${width - 100}" y="${textYPosition}" font-size="${fontSize}" font-family="${fontFamily}" fill="gold" text-anchor="end">${cameraInfo}</text>
+               </svg>`;
 
         await image
-            // .extend({ // extend不支持透明度
-            //     bottom: barHeight,
-            //     background: { r: 0, g: 0, b: 0, alpha: 1 }
-            // })
             .composite([{
                 input: Buffer.from(svgOverlay),
-                gravity: 'south'
+                gravity: 'south',
             }])
             .jpeg({ quality: 90 })
             .toFile(outputPath);
